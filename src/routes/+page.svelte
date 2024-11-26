@@ -5,7 +5,7 @@
 </script>
 
 <StarBackground />
-<section id="home">
+<section class="opacity-0" id="home">
   <div class="flex content-center items-center">
     <img
       alt="iLan standing in front of water at night, with a city skyline behind him in the distance."
