@@ -64,8 +64,8 @@
     const rawPullAngle = Math.asin(deltaY / pullDistance);
     const pullAngle = deltaX < 0 ? Math.PI - rawPullAngle : rawPullAngle;
 
-    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * 20);
-    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * 20);
+    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * 16);
+    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * 16);
 
     return { pullX, pullY, pullDistance };
   };
@@ -110,4 +110,4 @@
   });
 </script>
 
-<canvas bind:this={canvas} class="fixed left-0 top-0 -z-10"></canvas>
+<canvas bind:this={canvas} class="fixed left-0 top-0 -z-20"></canvas>

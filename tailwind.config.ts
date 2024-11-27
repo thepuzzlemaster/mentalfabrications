@@ -89,6 +89,9 @@ const config: Config = {
         'caret-blink': 'caret-blink 1.25s ease-out infinite',
       },
     },
+    minWidth: {
+      '188': '48rem',
+    },
   },
   plugins: [tailwindcssAnimate],
 };

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { STAR_BLOCKER } from '$lib/styleClasses/starBlocker';
   import { cn } from '$lib/utils';
   import type { Snippet } from 'svelte';
   import type { HTMLAnchorAttributes } from 'svelte/elements';
@@ -17,15 +18,16 @@
 <li class={cn(className)}>
   <a
     class={cn(
+      STAR_BLOCKER,
       'rounded-md',
       'px-4',
       'py-2',
-      'text-emerald-500',
-      'hover:text-emerald-400',
+      'text-emerald-400',
+      'hover:text-emerald-300',
       'focus-visible:outline-none',
       'focus-visible:ring-1',
       'focus-visible:ring-ring',
-      'text-lg',
+      'text-xl',
       'transition-colors',
     )}
     {href}
