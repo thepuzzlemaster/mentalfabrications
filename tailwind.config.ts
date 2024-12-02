@@ -88,9 +88,12 @@ const config: Config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'caret-blink': 'caret-blink 1.25s ease-out infinite',
       },
-    },
-    minWidth: {
-      '188': '48rem',
+      height: {
+        '0.75': '0.1875rem',
+      },
+      minWidth: {
+        '188': '48rem',
+      },
     },
   },
   plugins: [tailwindcssAnimate],

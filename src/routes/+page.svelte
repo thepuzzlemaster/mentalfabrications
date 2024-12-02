@@ -21,7 +21,7 @@
     <div class="flex content-center items-center">
       <img
         alt="iLan standing in front of water at night, with a city skyline behind him in the distance."
-        class="max-w-96 rounded-full"
+        class="mt-12 max-w-96 rounded-full"
         src={iLanPhoto}
       />
       <div class={cn(STAR_BLOCKER, 'ml-4', 'flex-col', 'p-8')}>

@@ -4,24 +4,21 @@
   import type { Snippet } from 'svelte';
   import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-  type $$Props = HTMLAnchorAttributes;
-
-  interface Props {
+  interface Props extends HTMLAnchorAttributes {
     children: Snippet;
-    className?: $$Props['class'];
-    href: $$Props['href'];
+    href: HTMLAnchorAttributes['href'];
   }
 
-  let { children, className, href, ...restProps }: Props = $props();
+  let { children, class: className, href, ...restProps }: Props = $props();
 </script>
 
-<li class={cn(className)}>
+<li class={cn(className, 'flex w-full md:w-auto')}>
   <a
     class={cn(
       STAR_BLOCKER,
       'rounded-md',
       'px-4',
-      'py-2',
+      'py-1',
       'text-emerald-400',
       'hover:text-emerald-300',
       'focus-visible:outline-none',
@@ -29,6 +26,7 @@
       'focus-visible:ring-ring',
       'text-xl',
       'transition-colors',
+      'w-full',
     )}
     {href}
     {...restProps}
