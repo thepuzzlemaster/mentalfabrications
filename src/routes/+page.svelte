@@ -17,7 +17,7 @@
 
 <StarBackground />
 <div class="flex flex-col">
-  <section id="home self-start">
+  <section id="home">
     <div class="flex content-center items-center">
       <img
         alt="iLan standing in front of water at night, with a city skyline behind him in the distance."
@@ -126,7 +126,10 @@
     </div>
   </section>
 
-  <section class={cn(STAR_BLOCKER, 'mt-48', 'self-center', 'flex', 'flex-col', 'items-end')}>
+  <section
+    id="projects"
+    class={cn(STAR_BLOCKER, 'mt-48', 'self-center', 'flex', 'flex-col', 'items-end')}
+  >
     <ShadowText class="mb-16 text-5xl font-light" tag="h2">
       Projects: A Digital Curio Cabinet
     </ShadowText>
