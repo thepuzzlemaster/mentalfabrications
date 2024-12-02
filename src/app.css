@@ -74,3 +74,9 @@
     font-family: 'Raleway', sans-serif;
   }
 }
+
+@layer utilities {
+  .items-last-baseline {
+    align-items: last baseline;
+  }
+}
