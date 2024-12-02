@@ -1,5 +1,8 @@
 <script lang="ts">
   import iLanPhoto from '$lib/assets/images/me-seattle-2.webp';
+  import radiousImage from '$lib/assets/images/projects-radious.webp';
+  import scheduliciousImage from '$lib/assets/images/projects-schedulicious.webp';
+  import tableauImage from '$lib/assets/images/projects-tableau.webp';
   import ShadowText from '$lib/components/shadowText.svelte';
   import StarBackground from '$lib/components/starBackground/starBackground.svelte';
   import { STAR_BLOCKER } from '$lib/styleClasses/starBlocker';
@@ -30,11 +33,11 @@
           >
             iLan Epstein
           </ShadowText>
-          <span class="ml-3 text-lg">(he/him)</span>
+          <span class="ml-3 text-lg text-gray-300">(he/him)</span>
         </div>
         <div class="text-xl">UX-focused engineer</div>
         <div class="text-lg">Disprover of impossibilities</div>
-        <div class="text-lg">Finder of problems</div>
+        <div class="text-lg">Pre-emptive problem finder</div>
         <div class="text-lg">Creative problem solver</div>
       </div>
     </div>
@@ -128,7 +131,25 @@
       Projects: A Digital Curio Cabinet
     </ShadowText>
 
-    <ProjectCard className="mb-36" title="Radious">
+    <ProjectCard
+      className="mb-36"
+      imageAlt="Screenshot of Radious.pro showing search results for workspaces on the left, and POI's on a map on the right."
+      imageUrl={radiousImage}
+      linkUrl="https://www.radious.pro"
+      technologies={[
+        'React',
+        'NextJS',
+        'Typescript',
+        'SCSS',
+        'Customized Bootstrap DLS',
+        'Google Cloud APIs',
+        "Add'l 3rd party integrations",
+        'Zustand',
+        'Jest w/ React Testing Library',
+        'git',
+      ]}
+      title="Radious"
+    >
       {#snippet content()}
         <p class="mb-2">
           The Radious.pro website, built with Next.js, exemplifies a comprehensive approach to
@@ -147,13 +168,28 @@
       {/snippet}
     </ProjectCard>
 
-    <ProjectCard className="mb-36" title="Schedulicious">
+    <ProjectCard
+      className="mb-36"
+      imageUrl={scheduliciousImage}
+      imageAlt=""
+      linkUrl="https://signup.radious.pro/events/techworks-ai-in-marketing-rad-workday-4388661"
+      technologies={[
+        'Svelte/Sveltekit',
+        'Tailwind',
+        'Typescript',
+        'Vitest w/ Testing Library',
+        'Zod',
+        'git',
+      ]}
+      title="Schedulicious"
+    >
       {#snippet content()}
         <p class="mb-2">
-          This project went from concept to fully deployed functionality in under a month, meeting a
-          unique business need for Radious: enabling event attendees to register for specific
-          timeslots based on availability. Alongside displaying detailed event information to set
-          clear expectations for attendees, it seamlessly handles the complexities of scheduling.
+          This project went from concept to fully deployed in under a month, meeting a unique
+          business need for Radious: enabling event attendees to register for specific timeslots
+          based on availability, for both mobile and desktop users. Alongside displaying detailed
+          event information to set clear expectations for attendees, it seamlessly handles the
+          complexities of scheduling.
         </p>
         <p>
           The platform lets users see who else is attending their chosen timeslot—perfect for
@@ -162,6 +198,42 @@
           robust waitlist feature, allowing users to sign up for full timeslots and automatically
           secure a spot if one opens up. This combination of efficiency and user-centric design
           ensures a smooth experience for both organizers and participants.
+        </p>
+      {/snippet}
+    </ProjectCard>
+
+    <ProjectCard
+      className="mb-36"
+      imageAlt=""
+      imageUrl={tableauImage}
+      linkUrl="https://tableau.github.io/tableau-ui/"
+      title="Tableau Shared Widgets"
+      technologies={[
+        'React',
+        'Typescript',
+        'Typestyle',
+        'Robust documentation',
+        'Slack integrations',
+        'Enzyme',
+        'Jest w/ React Testing Library',
+        'git',
+      ]}
+    >
+      {#snippet content()}
+        <p class="mb-2">
+          The Tableau Shared Widgets team focuses on creating and maintaining a unified component
+          library. Working closely with the Tableau Design Team, they ensure high-level design
+          fidelity as they develop shared UI components that work consistently in diverse
+          environments which are utilized by more than 100 internal development teams across Tableau
+          (Shared Widgets) as well as by public consumers (Tableau-UI).
+        </p>
+        <p>
+          These widgets are designed to enhance functionality and user experience by supporting
+          features like dashboard extensions, which allow custom JavaScript integrations with
+          Tableau visualizations, context menus that interact with Tableau Workbooks, and all other
+          UI that users use to interact with Tableau. The team's efforts help reduce the maintenance
+          burden of multiple codebases, ensure feature consistency, accessibility compliance, and
+          significantly accelerate development cycles across Tableau’s ecosystem.
         </p>
       {/snippet}
     </ProjectCard>
