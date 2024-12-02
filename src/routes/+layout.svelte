@@ -5,6 +5,6 @@
 </script>
 
 <Navbar />
-<div class="p-8 text-emerald-50">
+<div class="p-4 text-emerald-50 md:p-8">
   {@render children()}
 </div>

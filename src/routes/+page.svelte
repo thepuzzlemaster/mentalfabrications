@@ -18,22 +18,24 @@
 <StarBackground />
 <div class="flex flex-col">
   <section id="home">
-    <div class="flex content-center items-center">
+    <div class="flex flex-wrap content-center items-center gap-4">
       <img
         alt="iLan standing in front of water at night, with a city skyline behind him in the distance."
-        class="mt-12 max-w-96 rounded-full"
+        class="mt-12 w-full max-w-96 rounded-full"
         src={iLanPhoto}
       />
-      <div class={cn(STAR_BLOCKER, 'ml-4', 'flex-col', 'p-8')}>
-        <div class="flex items-baseline">
+      <div class={cn(STAR_BLOCKER, 'flex-col', 'p-4', 'md:p-8')}>
+        <div class="items-last-baseline flex">
           <ShadowText
-            class="mb-2 text-6xl font-bold"
+            class="mb-2 shrink text-6xl font-bold"
             shadowClassName="text-emerald-600 -left-1 top-1"
             tag="h1"
           >
             iLan Epstein
+            {#snippet noShadowChildren()}
+              <span class="ml-3 text-lg font-normal text-gray-300">(he/him)</span>
+            {/snippet}
           </ShadowText>
-          <span class="ml-3 text-lg text-gray-300">(he/him)</span>
         </div>
         <div class="text-xl">UX-focused engineer</div>
         <div class="text-lg">Disprover of impossibilities</div>
@@ -42,8 +44,8 @@
       </div>
     </div>
 
-    <div class={cn(STAR_BLOCKER, 'mt-48')} id="about-me">
-      <ShadowText class="mb-4 text-5xl font-light" tag="h2">
+    <div class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24')} id="about-me">
+      <ShadowText class="mb-4 text-4xl font-light sm:text-5xl" tag="h2">
         I build interfaces. You Click Them. Magic Happens.
       </ShadowText>
       <div class="max-w-3xl text-lg">
@@ -56,10 +58,23 @@
   </section>
 
   <section
-    class={cn(STAR_BLOCKER, 'mt-48', 'text-right', 'flex', 'flex-col', 'items-end', 'self-end')}
+    class={cn(
+      STAR_BLOCKER,
+      'sm:mt-48',
+      'mt-24',
+      'text-right',
+      'flex',
+      'flex-col',
+      'items-end',
+      'self-end',
+    )}
     id="about-me"
   >
-    <ShadowText class="mb-4 text-5xl font-light" shadowClassName="left-auto right-0.5" tag="h2">
+    <ShadowText
+      class="mb-4 text-4xl font-light sm:text-5xl"
+      shadowClassName="left-auto right-0.5"
+      tag="h2"
+    >
       Turning Ideas Into Interfaces
     </ShadowText>
     <div class="max-w-3xl text-lg">
@@ -70,8 +85,8 @@
     </div>
   </section>
 
-  <section class={cn(STAR_BLOCKER, 'mt-48', 'self-start')} id="skills">
-    <ShadowText class="mb-4 text-5xl font-light" tag="h2">My Repertoire</ShadowText>
+  <section class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24', 'self-start')} id="skills">
+    <ShadowText class="mb-4 text-4xl font-light sm:text-5xl" tag="h2">My Repertoire</ShadowText>
     <div class="max-w-3xl text-lg">
       Every project is its own unique adventure, but these are the skills I’ve leaned on
       most—whether recently or consistently throughout my nearly two decades of experience. That
@@ -128,9 +143,9 @@
 
   <section
     id="projects"
-    class={cn(STAR_BLOCKER, 'mt-48', 'self-center', 'flex', 'flex-col', 'items-end')}
+    class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24', 'self-center', 'flex', 'flex-col', 'items-end')}
   >
-    <ShadowText class="mb-16 text-5xl font-light" tag="h2">
+    <ShadowText class="mb-16 text-4xl font-light sm:text-5xl" tag="h2">
       Projects: A Digital Curio Cabinet
     </ShadowText>
 

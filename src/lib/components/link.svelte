@@ -11,6 +11,7 @@
   class={cn(
     className,
     'text-emerald-300',
+    'leading-snug',
     'underline',
     'hover:text-emerald-400',
     'transition-colors',

@@ -32,13 +32,12 @@
   }: Props = $props();
 </script>
 
-<div class={cn(className, 'flex', 'flex-col', 'items-end')}>
+<div class={cn(className)}>
   <div
     class={cn(
       'relative',
       'z-10',
       'rounded-lg',
-      'min-w-188',
       'max-w-4xl',
       'min-h-48',
       'mb-8',
@@ -61,7 +60,7 @@
     )}
     {...restProps}
   >
-    <div class="flex items-baseline justify-between">
+    <div class="items-last-baseline flex justify-between gap-4">
       <h3 class="mb-4 text-3xl font-bold">{title}</h3>
       {#if linkUrl}
         <Link href={linkUrl} target="_blank">View project</Link>
@@ -70,9 +69,9 @@
         <div class="font-light italic">{noLinkText}</div>
       {/if}
     </div>
-    <div class="flex items-end gap-6">
+    <div class="flex flex-col items-end gap-6 lg:flex-row">
       <div>{@render content()}</div>
-      <img class="max-w-sm rounded-lg object-contain" alt={imageAlt} src={imageUrl} />
+      <img class="max-w-full rounded-lg object-contain sm:max-w-sm" alt={imageAlt} src={imageUrl} />
     </div>
     {#if technologies}
       <h4 class="mt-4 text-xl font-semibold">Technologies</h4>
