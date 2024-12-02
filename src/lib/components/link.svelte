@@ -2,13 +2,9 @@
   import { cn } from '$lib/utils';
   import type { HTMLAnchorAttributes } from 'svelte/elements';
 
-  type $$Props = HTMLAnchorAttributes;
+  interface Props extends HTMLAnchorAttributes {}
 
-  interface Props extends $$Props {
-    className?: $$Props['class'];
-  }
-
-  const { children, className, ...restProps }: Props = $props();
+  const { children, class: className, ...restProps }: Props = $props();
 </script>
 
 <a

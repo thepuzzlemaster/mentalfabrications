@@ -7,7 +7,7 @@
   type $$props = HTMLAttributes<HTMLDivElement>;
 
   interface Props {
-    className?: $$props['class'];
+    class?: $$props['class'];
     content: Snippet;
     imageAlt: string;
     imageUrl: string;
@@ -19,7 +19,7 @@
   }
 
   const {
-    className,
+    class: className,
     content,
     imageAlt,
     imageUrl,

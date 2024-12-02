@@ -7,12 +7,12 @@
 
   interface Props {
     children: Snippet;
-    className?: $$Props['class'];
+    class?: $$Props['class'];
     shadowClassName?: $$Props['class'];
     tag: string;
   }
 
-  let { children, className, shadowClassName, tag, ...restProps }: Props = $props();
+  let { children, class: className, shadowClassName, tag, ...restProps }: Props = $props();
 </script>
 
 <svelte:element this={tag} {...restProps} class={cn(className, 'relative', 'z-10')}>

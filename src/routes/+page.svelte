@@ -27,7 +27,7 @@
       <div class={cn(STAR_BLOCKER, 'ml-4', 'flex-col', 'p-8')}>
         <div class="flex items-baseline">
           <ShadowText
-            className="text-6xl font-bold mb-2"
+            class="mb-2 text-6xl font-bold"
             shadowClassName="text-emerald-600 -left-1 top-1"
             tag="h1"
           >
@@ -43,7 +43,7 @@
     </div>
 
     <div class={cn(STAR_BLOCKER, 'mt-48')} id="about-me">
-      <ShadowText className="text-5xl mb-4 font-light" tag="h2">
+      <ShadowText class="mb-4 text-5xl font-light" tag="h2">
         I build interfaces. You Click Them. Magic Happens.
       </ShadowText>
       <div class="max-w-3xl text-lg">
@@ -59,7 +59,7 @@
     class={cn(STAR_BLOCKER, 'mt-48', 'text-right', 'flex', 'flex-col', 'items-end', 'self-end')}
     id="about-me"
   >
-    <ShadowText className="text-5xl mb-4 font-light" shadowClassName="left-auto right-0.5" tag="h2">
+    <ShadowText class="mb-4 text-5xl font-light" shadowClassName="left-auto right-0.5" tag="h2">
       Turning Ideas Into Interfaces
     </ShadowText>
     <div class="max-w-3xl text-lg">
@@ -71,7 +71,7 @@
   </section>
 
   <section class={cn(STAR_BLOCKER, 'mt-48', 'self-start')} id="skills">
-    <ShadowText className="text-5xl mb-4 font-light" tag="h2">My Repertoire</ShadowText>
+    <ShadowText class="mb-4 text-5xl font-light" tag="h2">My Repertoire</ShadowText>
     <div class="max-w-3xl text-lg">
       Every project is its own unique adventure, but these are the skills I’ve leaned on
       most—whether recently or consistently throughout my nearly two decades of experience. That
@@ -127,12 +127,12 @@
   </section>
 
   <section class={cn(STAR_BLOCKER, 'mt-48', 'self-center', 'flex', 'flex-col', 'items-end')}>
-    <ShadowText className="text-5xl mb-16 font-light" tag="h2">
+    <ShadowText class="mb-16 text-5xl font-light" tag="h2">
       Projects: A Digital Curio Cabinet
     </ShadowText>
 
     <ProjectCard
-      className="mb-36"
+      class="mb-36"
       imageAlt="Screenshot of Radious.pro showing search results for workspaces on the left, and POI's on a map on the right."
       imageUrl={radiousImage}
       linkUrl="https://www.radious.pro"
@@ -169,7 +169,7 @@
     </ProjectCard>
 
     <ProjectCard
-      className="mb-36"
+      class="mb-36"
       imageUrl={scheduliciousImage}
       imageAlt=""
       linkUrl="https://signup.radious.pro/events/techworks-ai-in-marketing-rad-workday-4388661"
@@ -203,7 +203,7 @@
     </ProjectCard>
 
     <ProjectCard
-      className="mb-36"
+      class="mb-36"
       imageAlt=""
       imageUrl={tableauImage}
       linkUrl="https://tableau.github.io/tableau-ui/"
