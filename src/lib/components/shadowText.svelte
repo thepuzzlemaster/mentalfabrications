@@ -8,15 +8,24 @@
   interface Props {
     children: Snippet;
     class?: $$Props['class'];
+    noShadowChildren?: Snippet;
     shadowClassName?: $$Props['class'];
     tag: string;
   }
 
-  let { children, class: className, shadowClassName, tag, ...restProps }: Props = $props();
+  let {
+    children,
+    class: className,
+    noShadowChildren,
+    shadowClassName,
+    tag,
+    ...restProps
+  }: Props = $props();
 </script>
 
 <svelte:element this={tag} {...restProps} class={cn(className, 'relative', 'z-10')}>
-  {@render children()}
+  {@render children()}{@render noShadowChildren?.()}
+  <!-- prettier-ignore -->
   <span
     aria-hidden="true"
     class={cn(
@@ -30,7 +39,5 @@
       '-z-10',
       shadowClassName,
     )}
-  >
-    {@render children()}
-  </span>
+  >{@render children()}<span class="opacity-0">{@render noShadowChildren?.()}</span></span>
 </svelte:element>
