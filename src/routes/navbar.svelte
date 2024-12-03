@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { Label } from '$lib/components/ui/label';
+  import { Switch } from '$lib/components/ui/switch';
+  import { getAnimationContext } from '$lib/shared/animationContext';
   import { STAR_BLOCKER } from '$lib/styleClasses/starBlocker';
   import { cn } from '$lib/utils';
   import MobileNavButton from './mobileNavButton.svelte';
@@ -7,16 +10,25 @@
   let isOpen = $state(false);
   const menuId = 'mainMenu';
 
-  const toggleIsOpen = (newIsOpen?: boolean) => {
-    isOpen = newIsOpen !== undefined ? newIsOpen : !isOpen;
-  };
-
   const onButtonClick = () => {
     isOpen = !isOpen;
   };
+
+  let allowAnimationContext$ = getAnimationContext();
 </script>
 
-<nav aria-label="main menu" class="fixed right-0 top-0 z-30 flex w-full flex-col items-end pt-2">
+<nav aria-label="main menu" class="fixed right-0 top-0 z-30 flex w-full justify-between pt-2">
+  <div class={cn(STAR_BLOCKER, 'ml-4 flex items-center space-x-2')}>
+    <Label for="motion">Motion</Label>
+    <Switch
+      checked={allowAnimationContext$.allowAnimation}
+      controlledChecked
+      id="motion"
+      onCheckedChange={() => {
+        allowAnimationContext$.allowAnimation = !allowAnimationContext$.allowAnimation;
+      }}
+    />
+  </div>
   <MobileNavButton
     aria-controls={menuId}
     class={cn(STAR_BLOCKER, 'z-10 mr-4 mt-2 md:hidden')}

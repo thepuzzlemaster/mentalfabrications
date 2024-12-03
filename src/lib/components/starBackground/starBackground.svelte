@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { getAnimationContext } from '$lib/shared/animationContext';
   import clamp from 'lodash/clamp';
   import { onMount } from 'svelte';
+
+  const allowAnimationContext$ = getAnimationContext();
 
   interface Star {
     brightness: number;
@@ -56,6 +59,12 @@
     mouseX = clamp(event.clientX, 0, width);
     mouseY = clamp(event.clientY, 0, height);
   };
+
+  $effect(() => {
+    if (allowAnimationContext$.allowAnimation) {
+      requestAnimationFrame(animate);
+    }
+  });
 
   onMount(() => {
     stars.forEach((star, index) => {
@@ -159,7 +168,9 @@
       drawStars();
     }
 
-    requestAnimationFrame(animate);
+    if (allowAnimationContext$.allowAnimation) {
+      requestAnimationFrame(animate);
+    }
   };
 </script>
 
