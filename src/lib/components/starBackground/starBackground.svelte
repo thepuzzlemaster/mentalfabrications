@@ -16,13 +16,15 @@
     yCurrent: number;
     xFinal: number;
     yFinal: number;
+    /** size of the star in px: between 2-12 for primary stars, 2-6 for bg stars*/
     size: number;
   }
 
   let canvas: HTMLCanvasElement | undefined = undefined;
-  const speed = 0.075;
+  const speed = 0.1;
   const maxPull = 20;
   const starCount = 178;
+  const bgSstarCount = 600;
   const stars: Star[] = $state([]);
 
   let mouseX: number | undefined = $state(undefined);
@@ -45,6 +47,26 @@
       xFinal: xPercent,
       yFinal: yPercent,
       size: Math.random() * 10 + 2,
+    });
+  }
+
+  while (stars.length < bgSstarCount) {
+    const xPercent = Math.random();
+    const yPercent = Math.random();
+    const brightness = Math.abs(Math.random() - 0.5);
+
+    stars.push({
+      brightness,
+      currentBrightness: 0,
+      xPercent: xPercent,
+      yPercent: yPercent,
+      xStart: xPercent,
+      yStart: yPercent,
+      xCurrent: xPercent,
+      yCurrent: yPercent,
+      xFinal: xPercent,
+      yFinal: yPercent,
+      size: Math.random() * 4 + 2,
     });
   }
 
@@ -81,6 +103,7 @@
         yFinal: yPosition,
       };
     });
+
     document.addEventListener('mousemove', onMouseMove);
     requestAnimationFrame(animate);
 
@@ -89,8 +112,6 @@
 
   const getStarPull = (
     star: Star,
-    totalWidth: number,
-    totalHeight: number,
     mouseX?: number,
     mouseY?: number,
   ): { pullX: number; pullY: number; pullDistance: number } => {
@@ -107,8 +128,8 @@
     const rawPullAngle = Math.asin(deltaY / pullDistance);
     const pullAngle = deltaX < 0 ? Math.PI - rawPullAngle : rawPullAngle;
 
-    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * maxPull);
-    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * maxPull);
+    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * maxPull) * (star.size / 10);
+    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * maxPull) * (star.size / 10);
 
     return { pullX, pullY, pullDistance };
   };
@@ -121,6 +142,7 @@
 
     canvas.width = visualViewport.width;
     canvas.height = visualViewport.height;
+
     const maxViewportDistance = Math.sqrt(
       canvas.width * canvas.width + canvas.height * canvas.height,
     );
@@ -135,7 +157,7 @@
       // context.fillStyle = `rgba(165, 243, 207, ${star.brightness / 2})`;
       // context.fill();
 
-      const starPull = getStarPull(star, canvas.width, canvas.height, mouseX, mouseY);
+      const starPull = getStarPull(star, mouseX, mouseY);
       star.xFinal = star.xStart + starPull.pullX;
       star.yFinal = star.yStart + starPull.pullY;
 
@@ -145,13 +167,34 @@
       star.xCurrent += deltaX;
       star.yCurrent += deltaY;
 
-      const brightness = Math.max(0.065, 1.2 - (starPull.pullDistance / maxViewportDistance) * 2);
+      const brightness = Math.min(
+        star.brightness,
+        Math.max(0.065, 1.2 - (starPull.pullDistance / maxViewportDistance) * 2),
+      );
       const brightnessDelta = brightness - star.currentBrightness;
       star.currentBrightness += brightnessDelta * (speed * 1.5);
 
       context.beginPath();
       context.arc(star.xCurrent, star.yCurrent, star.size / 2, 0, Math.PI * 2);
       context.fillStyle = `rgba(255, 255, 255, ${star.currentBrightness})`;
+      context.fill();
+
+      const blurSize = 1.5;
+      const blur = context.createRadialGradient(
+        star.xCurrent,
+        star.yCurrent,
+        0,
+        star.xCurrent,
+        star.yCurrent,
+        star.size * blurSize,
+      );
+      blur.addColorStop(0, `rgba(255, 255, 255, ${star.currentBrightness})`);
+      blur.addColorStop(0.65, `rgba(255, 255, 255, ${star.currentBrightness / 8})`);
+      blur.addColorStop(1, `rgba(255, 255, 255, ${0})`);
+
+      context.beginPath();
+      context.arc(star.xCurrent, star.yCurrent, star.size * blurSize, 0, Math.PI * 2);
+      context.fillStyle = blur;
       context.fill();
     });
   };
