@@ -1,5 +1,6 @@
 <script lang="ts">
   import iLanPhoto from '$lib/assets/images/me-seattle-2.webp';
+  import frogImage from '$lib/assets/images/projects-frog.png';
   import radiousImage from '$lib/assets/images/projects-radious.webp';
   import scheduliciousImage from '$lib/assets/images/projects-schedulicious.webp';
   import tableauImage from '$lib/assets/images/projects-tableau.webp';
@@ -250,6 +251,59 @@
           burden of multiple codebases, ensure feature consistency, accessibility compliance, and
           significantly accelerate development cycles across Tableau’s ecosystem.
         </p>
+      {/snippet}
+    </ProjectCard>
+
+    <ProjectCard
+      class={cn(STAR_BLOCKER, 'mb-36')}
+      imageAlt=""
+      imageUrl={frogImage}
+      noLinkText="Not publicly sharable"
+      title="frog design"
+      technologies={[
+        'Many different tech stacks',
+        'NodeJS',
+        'React',
+        'SCSS',
+        'Web Components',
+        'git',
+      ]}
+    >
+      {#snippet content()}
+        <p class="mb-2">
+          Being a design technologist at frog design meant living at the intersection of design and
+          technology during a particularly transformative period for both industries. I contributed
+          to cutting-edge projects spanning various industries, such as healthcare, automotive,
+          gaming, consumer electronics, and finance, addressing complex challenges with creativity
+          and technical acumen. My role involved prototyping and building interactive experiences to
+          bring innovative concepts to life, often serving as the bridge between visionary design
+          teams and practical engineering requirements.
+        </p>
+        <div>
+          Key elements of these projects included:
+          <ul>
+            <li class="ml-4 list-disc">
+              <div class="font-semibold">Prototyping and Experimentation:</div>
+              Rapidly developing proof-of-concept prototypes for web, mobile, or dedicated hardware to
+              test ideas with stakeholders or end users.
+            </li>
+            <li class="ml-4 list-disc">
+              <div class="font-semibold">Collaboration Across Disciplines:</div>
+              Partnering closely with UX designers, researchers, and strategists to translate user insights
+              into tangible digital experiences.
+            </li>
+            <li class="ml-4 list-disc">
+              <div class="font-semibold">Adaptability in Tech Stacks:</div>
+              Leveraging a range of tools and technologies, from front-end development frameworks to
+              back-end systems, to adapt to diverse client needs.
+            </li>
+            <li class="ml-4 list-disc">
+              <div class="font-semibold">Storytelling through Technology:</div>
+              Helping clients and teams envision future possibilities by building dynamic prototypes
+              that could both showcase potential solutions and highlight technical feasibility.
+            </li>
+          </ul>
+        </div>
       {/snippet}
     </ProjectCard>
   </section>
