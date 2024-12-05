@@ -18,7 +18,7 @@
 
 <StarBackground />
 <div class="flex flex-col">
-  <section id="home">
+  <section id="about-me">
     <div class="flex flex-wrap content-center items-center gap-4">
       <img
         alt="iLan standing in front of water at night, with a city skyline behind him in the distance."
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24')} id="about-me">
+    <div class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24')}>
       <ShadowText class="mb-4 text-4xl font-light sm:text-5xl" tag="h2">
         I build interfaces. You Click Them. Magic Happens.
       </ShadowText>

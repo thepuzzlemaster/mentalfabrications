@@ -60,7 +60,6 @@
     )}
     id={menuId}
   >
-    <NavLink onclick={() => (isOpen = false)} href="#home">Home</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#about-me">About me</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#skills">Skills</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#projects">Projects</NavLink>
