@@ -141,16 +141,13 @@
     </div>
   </section>
 
-  <section
-    id="projects"
-    class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24', 'self-center', 'flex', 'flex-col', 'items-end')}
-  >
-    <ShadowText class="mb-16 text-4xl font-light sm:text-5xl" tag="h2">
+  <section id="projects" class="mt-24 flex flex-col items-end self-center sm:mt-48">
+    <ShadowText class={cn(STAR_BLOCKER, 'mb-16 text-4xl font-light sm:text-5xl')} tag="h2">
       Projects: A Digital Curio Cabinet
     </ShadowText>
 
     <ProjectCard
-      class="mb-36"
+      class={cn(STAR_BLOCKER, 'mb-36')}
       imageAlt="Screenshot of Radious.pro showing search results for workspaces on the left, and POI's on a map on the right."
       imageUrl={radiousImage}
       linkUrl="https://www.radious.pro"
@@ -187,7 +184,7 @@
     </ProjectCard>
 
     <ProjectCard
-      class="mb-36"
+      class={cn(STAR_BLOCKER, 'mb-36')}
       imageUrl={scheduliciousImage}
       imageAlt=""
       linkUrl="https://signup.radious.pro/events/techworks-ai-in-marketing-rad-workday-4388661"
@@ -221,8 +218,8 @@
     </ProjectCard>
 
     <ProjectCard
-      class="mb-36"
-      imageAlt=""
+      class={cn(STAR_BLOCKER, 'mb-36')}
+      imageAlt="Documentation for a Badges UI component. It showcases different styles for regular badges, as well as numeric badges."
       imageUrl={tableauImage}
       linkUrl="https://tableau.github.io/tableau-ui/"
       title="Tableau Shared Widgets"
