@@ -143,9 +143,11 @@
   </section>
 
   <section id="projects" class="mt-24 flex flex-col items-end self-center sm:mt-48">
-    <ShadowText class={cn(STAR_BLOCKER, 'mb-16 text-4xl font-light sm:text-5xl')} tag="h2">
-      Projects: A Digital Curio Cabinet
-    </ShadowText>
+    <div class={STAR_BLOCKER}>
+      <ShadowText class={cn('mb-16 text-4xl font-light sm:text-5xl')} tag="h2">
+        Projects: A Digital Curio Cabinet
+      </ShadowText>
+    </div>
 
     <ProjectCard
       class={cn(STAR_BLOCKER, 'mb-36')}
