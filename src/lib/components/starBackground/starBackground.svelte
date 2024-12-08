@@ -1,24 +1,38 @@
 <script lang="ts">
   import { getAnimationContext } from '$lib/shared/animationContext';
+  import { tweenProperty } from '$lib/shared/tweens';
   import clamp from 'lodash/clamp';
   import { onMount } from 'svelte';
 
   const allowAnimationContext$ = getAnimationContext();
 
-  interface Star {
-    brightness: number;
-    currentBrightness: number;
+  type ChangingStarProp<T> = {
+    current: T;
+    final: T;
+  };
+
+  type Star = {
+    brightness: ChangingStarProp<number>;
     xPercent: number;
     yPercent: number;
     xStart: number;
     yStart: number;
-    xCurrent: number;
-    yCurrent: number;
-    xFinal: number;
-    yFinal: number;
+    x: ChangingStarProp<number>;
+    y: ChangingStarProp<number>;
     /** size of the star in px: between 2-12 for primary stars, 2-6 for bg stars*/
-    size: number;
-  }
+    size: ChangingStarProp<number>;
+  } & (
+    | {
+        isShooting: false;
+        shootingX?: never;
+        shootingY?: never;
+      }
+    | {
+        isShooting: true;
+        shootingX: number;
+        shootingY: number;
+      }
+  );
 
   let canvas: HTMLCanvasElement | undefined = undefined;
   const speed = 0.1;
@@ -30,23 +44,42 @@
   let mouseX: number | undefined = $state(undefined);
   let mouseY: number | undefined = $state(undefined);
 
+  const getStartingCoords = (
+    x: number,
+    y: number,
+  ): Pick<Star, 'xPercent' | 'yPercent' | 'xStart' | 'yStart' | 'x' | 'y'> => {
+    return {
+      xPercent: x,
+      yPercent: y,
+      xStart: x,
+      yStart: y,
+      x: {
+        current: x,
+        final: x,
+      },
+      y: {
+        current: y,
+        final: y,
+      },
+    };
+  };
+
   while (stars.length < starCount) {
     const xPercent = Math.random();
     const yPercent = Math.random();
-    const brightness = Math.min(Math.random() + 0.3, 1);
+    const brightness = Math.min(Math.random() + 0.3, 0.8);
 
     stars.push({
-      brightness,
-      currentBrightness: 0,
-      xPercent: xPercent,
-      yPercent: yPercent,
-      xStart: xPercent,
-      yStart: yPercent,
-      xCurrent: xPercent,
-      yCurrent: yPercent,
-      xFinal: xPercent,
-      yFinal: yPercent,
-      size: Math.random() * 10 + 2,
+      brightness: {
+        current: 0,
+        final: brightness,
+      },
+      ...getStartingCoords(xPercent, yPercent),
+      size: {
+        current: 0,
+        final: Math.random() * 10 + 2,
+      },
+      isShooting: false,
     });
   }
 
@@ -56,17 +89,16 @@
     const brightness = Math.abs(Math.random() - 0.5);
 
     stars.push({
-      brightness,
-      currentBrightness: 0,
-      xPercent: xPercent,
-      yPercent: yPercent,
-      xStart: xPercent,
-      yStart: yPercent,
-      xCurrent: xPercent,
-      yCurrent: yPercent,
-      xFinal: xPercent,
-      yFinal: yPercent,
-      size: Math.random() * 4 + 2,
+      brightness: {
+        current: 0,
+        final: brightness,
+      },
+      ...getStartingCoords(xPercent, yPercent),
+      size: {
+        current: 0,
+        final: Math.random() * 4 + 2,
+      },
+      isShooting: false,
     });
   }
 
@@ -80,6 +112,17 @@
 
     mouseX = clamp(event.clientX, 0, width);
     mouseY = clamp(event.clientY, 0, height);
+  };
+
+  const onMouseDown = (event: MouseEvent) => {
+    const pressX = event.clientX;
+    const pressY = event.clientY;
+
+    const starIndex = Math.round(Math.random() * (stars.length - 1));
+
+    stars[starIndex].isShooting = true;
+    stars[starIndex].shootingX = pressX;
+    stars[starIndex].shootingY = pressY;
   };
 
   $effect(() => {
@@ -97,14 +140,19 @@
         ...star,
         xStart: xPosition,
         yStart: yPosition,
-        xCurrent: xPosition,
-        yCurrent: yPosition,
-        xFinal: xPosition,
-        yFinal: yPosition,
+        x: {
+          current: xPosition,
+          final: xPosition,
+        },
+        y: {
+          current: yPosition,
+          final: yPosition,
+        },
       };
     });
 
     document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousedown', onMouseDown);
     requestAnimationFrame(animate);
 
     return () => document.removeEventListener('mousemove', onMouseMove);
@@ -119,17 +167,17 @@
       return { pullX: 0, pullY: 0, pullDistance: 0 };
     }
 
-    const deltaX = mouseX - star.xCurrent;
+    const deltaX = mouseX - star.x.current;
     // Invert the y-axis to account for top-left origin
-    const deltaY = -(mouseY - star.yCurrent);
+    const deltaY = -(mouseY - star.y.current);
 
     const pullDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
     const rawPullAngle = Math.asin(deltaY / pullDistance);
     const pullAngle = deltaX < 0 ? Math.PI - rawPullAngle : rawPullAngle;
 
-    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * maxPull) * (star.size / 10);
-    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * maxPull) * (star.size / 10);
+    const pullX = Math.min(pullDistance, Math.cos(pullAngle) * maxPull) * (star.size.final / 10);
+    const pullY = -Math.min(pullDistance, Math.sin(pullAngle) * maxPull) * (star.size.final / 10);
 
     return { pullX, pullY, pullDistance };
   };
@@ -153,50 +201,75 @@
       }
 
       // context.beginPath();
-      // context.arc(star.xStart, star.yStart, star.size / 2, 0, Math.PI * 2);
-      // context.fillStyle = `rgba(165, 243, 207, ${star.brightness / 2})`;
+      // context.arc(star.xStart, star.yStart, star.size.final / 2, 0, Math.PI * 2);
+      // context.fillStyle = `rgba(165, 243, 207, ${star.brightness.final / 2})`;
       // context.fill();
 
       const starPull = getStarPull(star, mouseX, mouseY);
-      star.xFinal = star.xStart + starPull.pullX;
-      star.yFinal = star.yStart + starPull.pullY;
+      star.x.final = (star.shootingX || star.xStart) + starPull.pullX;
+      star.y.final = (star.shootingY || star.yStart) + starPull.pullY;
 
-      const deltaX = (star.xFinal - star.xCurrent) * speed;
-      const deltaY = (star.yFinal - star.yCurrent) * speed;
-
-      star.xCurrent += deltaX;
-      star.yCurrent += deltaY;
-
-      const brightness = Math.min(
-        star.brightness,
-        Math.max(0.065, 1.2 - (starPull.pullDistance / maxViewportDistance) * 2),
+      star.x.current = tweenProperty(
+        star.x.current,
+        star.x.final,
+        star.isShooting ? 1.5 : undefined,
       );
-      const brightnessDelta = brightness - star.currentBrightness;
-      star.currentBrightness += brightnessDelta * (speed * 1.5);
+      star.y.current = tweenProperty(
+        star.y.current,
+        star.y.final,
+        star.isShooting ? 1.5 : undefined,
+      );
+
+      const finalBrightness = star.isShooting
+        ? 1
+        : Math.min(
+            star.brightness.final,
+            Math.max(0.065, 1.2 - (starPull.pullDistance / maxViewportDistance) * 2),
+          );
+      star.brightness.current = tweenProperty(star.brightness.current, finalBrightness, 1.5);
+
+      const finalSize = star.isShooting ? star.size.final * 2 : star.size.final;
+      star.size.current = tweenProperty(star.size.current, finalSize, 0.5);
 
       context.beginPath();
-      context.arc(star.xCurrent, star.yCurrent, star.size / 2, 0, Math.PI * 2);
-      context.fillStyle = `rgba(255, 255, 255, ${star.currentBrightness})`;
+      context.arc(star.x.current, star.y.current, star.size.current / 2, 0, Math.PI * 2);
+      context.fillStyle = `rgba(255, 255, 255, ${star.brightness.current})`;
       context.fill();
 
       const blurSize = 1.5;
       const blur = context.createRadialGradient(
-        star.xCurrent,
-        star.yCurrent,
+        star.x.current,
+        star.y.current,
         0,
-        star.xCurrent,
-        star.yCurrent,
-        star.size * blurSize,
+        star.x.current,
+        star.y.current,
+        star.size.current * blurSize,
       );
-      blur.addColorStop(0, `rgba(255, 255, 255, ${star.currentBrightness})`);
-      blur.addColorStop(0.65, `rgba(255, 255, 255, ${star.currentBrightness / 8})`);
+      blur.addColorStop(0, `rgba(255, 255, 255, ${star.brightness.current})`);
+      blur.addColorStop(0.65, `rgba(255, 255, 255, ${star.brightness.current / 8})`);
       blur.addColorStop(1, `rgba(255, 255, 255, ${0})`);
 
       context.beginPath();
-      context.arc(star.xCurrent, star.yCurrent, star.size * blurSize, 0, Math.PI * 2);
+      context.arc(star.x.current, star.y.current, star.size.current * blurSize, 0, Math.PI * 2);
       context.fillStyle = blur;
       context.fill();
+
+      if (
+        star.isShooting &&
+        Math.abs(star.x.current - star.x.final) <= 20 &&
+        Math.abs(star.y.current - star.y.final) <= 20
+      ) {
+        Object.assign<Star, Partial<Star>>(star, {
+          xStart: star.x.final,
+          yStart: star.y.final,
+          isShooting: false,
+          shootingX: undefined,
+          shootingY: undefined,
+        });
+      }
     });
+
+    // console.log(stars.filter((star) => star.isShooting).length, 'shooting stars');
   };
 
   let previousTimestamp = 0;
