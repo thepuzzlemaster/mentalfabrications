@@ -64,6 +64,6 @@
     <NavLink onclick={() => (isOpen = false)} href="#skills">Skills</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#projects">Projects</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#contact">Contact</NavLink>
-    <NavLink onclick={() => (isOpen = false)} href="#art">Art</NavLink>
+    <!-- <NavLink onclick={() => (isOpen = false)} href="#art">Art</NavLink> -->
   </ul>
 </nav>
