@@ -6,6 +6,10 @@
   import tableauImage from '$lib/assets/images/projects-tableau.webp';
   import ShadowText from '$lib/components/shadowText.svelte';
   import StarBackground from '$lib/components/starBackground/starBackground.svelte';
+  import { Button } from '$lib/components/ui/button';
+  import { Input } from '$lib/components/ui/input';
+  import { Label } from '$lib/components/ui/label';
+  import { Textarea } from '$lib/components/ui/textarea';
   import { STAR_BLOCKER } from '$lib/styleClasses/starBlocker';
   import { cn } from '$lib/utils';
   import ProjectCard from './projectCard.svelte';
@@ -308,5 +312,32 @@
         </div>
       {/snippet}
     </ProjectCard>
+  </section>
+  <section class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24', 'self-start')} id="contact">
+    <ShadowText class="mb-12 text-4xl font-light sm:text-5xl" tag="h2">Get in touch!</ShadowText>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="f5900e51-ba59-4841-bc47-4f5b5ccf8ac0" />
+
+      <div class="my-4 max-w-56">
+        <Label for="name">Your name</Label>
+        <Input id="name" name="name" required />
+      </div>
+
+      <div class="my-4 max-w-56">
+        <Label for="email">Your email</Label>
+        <Input id="email" name="email" required />
+      </div>
+
+      <div class="my-4 min-w-96">
+        <Label for="message">What's on your mind?</Label>
+        <Textarea id="message" name="message" rows={4} required />
+      </div>
+
+      <input type="checkbox" name="botcheck" class="hidden" />
+
+      <div class="my-4">
+        <Button type="submit">Submit</Button>
+      </div>
+    </form>
   </section>
 </div>
