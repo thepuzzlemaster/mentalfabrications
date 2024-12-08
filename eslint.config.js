@@ -11,6 +11,9 @@ export default ts.config(
   prettier,
   ...svelte.configs['flat/prettier'],
   {
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'warn',
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
