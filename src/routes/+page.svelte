@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class={cn(STAR_BLOCKER, 'sm:mt-48', 'mt-24')}>
+    <div class={cn(STAR_BLOCKER, 'inline-block', 'sm:mt-48', 'mt-24')}>
       <ShadowText class="mb-4 text-4xl font-light sm:text-5xl" tag="h2">
         I build interfaces. You Click Them. Magic Happens.
       </ShadowText>
@@ -146,7 +146,7 @@
     </div>
   </section>
 
-  <section id="projects" class="mt-24 flex flex-col items-end self-center sm:mt-48">
+  <section id="projects" class="mt-24 flex flex-col items-center self-center sm:mt-48">
     <div class={STAR_BLOCKER}>
       <ShadowText class={cn('mb-16 text-4xl font-light sm:text-5xl')} tag="h2">
         Projects: A Digital Curio Cabinet
