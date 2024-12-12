@@ -7,6 +7,7 @@
   import MobileNavButton from './mobileNavButton.svelte';
   import NavLink from './navLink.svelte';
 
+  let clickCount = $state(0);
   let isOpen = $state(false);
   const menuId = 'mainMenu';
 
@@ -60,9 +61,14 @@
     )}
     id={menuId}
   >
-    <NavLink onclick={() => (isOpen = false)} href="#about-me">About me</NavLink>
-    <NavLink onclick={() => (isOpen = false)} href="#skills">Skills</NavLink>
+    {#if clickCount < 3}
+      <NavLink class="mr-8 hidden md:block" href={undefined} onclick={() => clickCount++}>
+        Click Me!
+      </NavLink>
+    {/if}
+    <NavLink onclick={() => (isOpen = false)} href="#about-me">About</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#projects">Projects</NavLink>
+    <NavLink target="_blank" onclick={() => (isOpen = false)} href="/resume">Résumé</NavLink>
     <NavLink onclick={() => (isOpen = false)} href="#contact">Contact</NavLink>
     <!-- <NavLink onclick={() => (isOpen = false)} href="#art">Art</NavLink> -->
   </ul>

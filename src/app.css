@@ -23,7 +23,8 @@
     --accent-foreground: 222.2 47.4% 11.2%;
     --destructive: 0 72.2% 50.6%;
     --destructive-foreground: 210 40% 98%;
-    --ring: 222.2 84% 4.9%;
+    /* --ring: 222.2 84% 4.9%; */
+    --ring: 149 80% 90%;
     --radius: 0.5rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -75,7 +76,12 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Maven Pro', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, a, button {
+    font-family: 'Kode Mono', monospace, sans-serif;
+    font-weight: 400;
   }
 
   section {

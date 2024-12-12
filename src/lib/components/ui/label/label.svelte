@@ -12,7 +12,7 @@
 <LabelPrimitive.Root
   bind:ref
   class={cn(
-    'text-sm font-medium leading-none text-emerald-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+    'text-sm leading-none text-emerald-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
     className,
   )}
   {...restProps}
