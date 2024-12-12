@@ -1,12 +1,18 @@
+import fluid, { extract, fontSize, screens } from 'fluid-tailwind';
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-  darkMode: ['class'],
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  safelist: ['dark'],
+  darkMode: [ 'class' ],
+  content: {
+    extract,
+    files: [ './src/**/*.{html,js,svelte,ts}' ],
+  },
+  safelist: [ 'dark' ],
   theme: {
+    screens,
+    fontSize,
     container: {
       center: true,
       padding: '2rem',
@@ -67,7 +73,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: [...fontFamily.sans],
+        sans: [ ...fontFamily.sans ],
       },
       keyframes: {
         'accordion-down': {
@@ -92,11 +98,12 @@ const config: Config = {
         '0.75': '0.1875rem',
       },
       minWidth: {
-        '188': '48rem',
+        '160': '40rem',
+        '192': '48rem',
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [ fluid, tailwindcssAnimate ],
 };
 
 export default config;
