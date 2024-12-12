@@ -2,6 +2,7 @@
   import { getAnimationContext } from '$lib/shared/animationContext';
   import { tweenProperty } from '$lib/shared/tweens';
   import clamp from 'lodash/clamp';
+  import debounce from 'lodash/debounce';
   import { onMount } from 'svelte';
 
   const allowAnimationContext$ = getAnimationContext();
@@ -132,7 +133,7 @@
   });
 
   onMount(() => {
-    stars.forEach((star, index) => {
+    const positionStar = (star: Star, index: number) => {
       const xPosition = (visualViewport?.width || window.innerWidth) * star.xPercent;
       const yPosition = (visualViewport?.height || window.innerHeight) * star.yPercent;
 
@@ -140,6 +141,10 @@
         ...star,
         xStart: xPosition,
         yStart: yPosition,
+        size: {
+          current: 0,
+          final: star.size.final,
+        },
         x: {
           current: xPosition,
           final: xPosition,
@@ -149,13 +154,26 @@
           final: yPosition,
         },
       };
-    });
+    };
 
+    const handleResize = debounce(() => {
+      stars.forEach(positionStar);
+    }, 300);
+
+    const resizeObserver = new ResizeObserver((entries) => handleResize());
+
+    stars.forEach(positionStar);
+
+    resizeObserver.observe(document.body);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mousedown', onMouseDown);
     requestAnimationFrame(animate);
 
-    return () => document.removeEventListener('mousemove', onMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousedown', onMouseDown);
+      resizeObserver.unobserve(document.body);
+    };
   });
 
   const getStarPull = (
@@ -262,6 +280,8 @@
         Object.assign<Star, Partial<Star>>(star, {
           xStart: star.x.final,
           yStart: star.y.final,
+          xPercent: star.x.final / canvas.width,
+          yPercent: star.y.final / canvas.height,
           isShooting: false,
           shootingX: undefined,
           shootingY: undefined,
