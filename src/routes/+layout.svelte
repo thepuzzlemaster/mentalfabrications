@@ -1,11 +1,15 @@
 <script lang="ts">
-  import { setAnimationContext } from '$lib/shared/animationContext';
+  import { setAnimationContext, type AnimationContext } from '$lib/shared/animationContext';
   import '../app.css';
   import Navbar from './navbar.svelte';
 
   let { children } = $props();
 
-  let allowAnimation$ = $state({ allowAnimation: true });
+  let allowAnimation$ = $state<AnimationContext>({
+    allowAnimation: true,
+    shouldResetStars: false,
+    shootingStarCount: 0,
+  });
 
   setAnimationContext(allowAnimation$);
 </script>

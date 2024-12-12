@@ -5,22 +5,28 @@
   import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
   import { fade } from 'svelte/transition';
 
-  type Props =
+  type Props = {
+    children: Snippet;
+    size?: 'sm';
+  } & (
     | ({
-        children: Snippet;
-      } & ({
         href: HTMLAnchorAttributes['href'];
-      } & HTMLAnchorAttributes))
+      } & HTMLAnchorAttributes)
     | ({
         href?: never;
-      } & HTMLButtonAttributes);
+      } & HTMLButtonAttributes)
+  );
 
-  let { children, class: className, href, ...restProps }: Props = $props();
+  let { children, class: className, href, size, ...restProps }: Props = $props();
   let isAnchor = !!href;
   let Component: 'a' | 'button' = isAnchor ? 'a' : 'button';
 </script>
 
-<li out:fade class={cn('flex w-full md:w-auto', className)}>
+<li
+  out:fade={{ duration: 200 }}
+  in:fade={{ delay: 250 }}
+  class={cn('flex w-full content-end md:w-auto', className)}
+>
   <svelte:element
     this={Component}
     class={cn(
@@ -33,7 +39,7 @@
       'focus-visible:outline-none',
       'focus-visible:ring',
       'focus-visible:ring-ring',
-      'text-2xl',
+      size ? 'text-xl' : 'text-2xl',
       'transition-colors',
       'w-full',
     )}

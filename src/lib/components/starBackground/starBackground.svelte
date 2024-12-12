@@ -36,11 +36,14 @@
   );
 
   let canvas: HTMLCanvasElement | undefined = undefined;
-  const speed = 0.1;
   const maxPull = 20;
   const starCount = 178;
   const bgSstarCount = 600;
   const stars: Star[] = $state([]);
+  let isMouseDown: boolean = $state(false);
+  let previousMouseX: number = $state(0);
+  let previousMouseY: number = $state(0);
+  let mouseDelta: number = $state(0);
 
   let mouseX: number | undefined = $state(undefined);
   let mouseY: number | undefined = $state(undefined);
@@ -65,43 +68,76 @@
     };
   };
 
-  while (stars.length < starCount) {
-    const xPercent = Math.random();
-    const yPercent = Math.random();
-    const brightness = Math.min(Math.random() + 0.3, 0.8);
+  const placeAllStars = (preservePosition?: boolean) => {
+    const getNewStarPosition = (): Pick<Star, 'xPercent' | 'yPercent'> => {
+      return {
+        xPercent: Math.random(),
+        yPercent: Math.random(),
+      };
+    };
 
-    stars.push({
-      brightness: {
-        current: 0,
-        final: brightness,
-      },
-      ...getStartingCoords(xPercent, yPercent),
-      size: {
-        current: 0,
-        final: Math.random() * 10 + 2,
-      },
-      isShooting: false,
-    });
-  }
+    if (preservePosition) {
+      stars.forEach((star, index) => {
+        const newPosition = getNewStarPosition();
+        stars[index].xPercent = newPosition.xPercent;
+        stars[index].yPercent = newPosition.yPercent;
+      });
+    }
 
-  while (stars.length < bgSstarCount) {
-    const xPercent = Math.random();
-    const yPercent = Math.random();
-    const brightness = Math.abs(Math.random() - 0.5);
+    const buildForegroundStar = (): Star => {
+      const position = getNewStarPosition();
+      const brightness = Math.min(Math.random() + 0.3, 0.8);
 
-    stars.push({
-      brightness: {
-        current: 0,
-        final: brightness,
-      },
-      ...getStartingCoords(xPercent, yPercent),
-      size: {
-        current: 0,
-        final: Math.random() * 4 + 2,
-      },
-      isShooting: false,
-    });
-  }
+      return {
+        brightness: {
+          current: 0,
+          final: brightness,
+        },
+        ...getStartingCoords(position.xPercent, position.yPercent),
+        size: {
+          current: 0,
+          final: Math.random() * 10 + 2,
+        },
+        isShooting: false,
+      };
+    };
+
+    const buildBackgroundStar = (): Star => {
+      const position = getNewStarPosition();
+      const brightness = Math.abs(Math.random() - 0.5);
+
+      return {
+        brightness: {
+          current: 0,
+          final: brightness,
+        },
+        ...getStartingCoords(position.xPercent, position.yPercent),
+        size: {
+          current: 0,
+          final: Math.random() * 4 + 2,
+        },
+        isShooting: false,
+      };
+    };
+
+    while (stars.length < starCount) {
+      stars.push(buildForegroundStar());
+    }
+
+    while (stars.length < bgSstarCount) {
+      stars.push(buildBackgroundStar());
+    }
+  };
+
+  const shootStar = (x: number, y: number) => {
+    const starIndex = Math.round(Math.random() * (stars.length - 1));
+
+    allowAnimationContext$.shootingStarCount++;
+
+    stars[starIndex].isShooting = true;
+    stars[starIndex].shootingX = x;
+    stars[starIndex].shootingY = y;
+  };
 
   const onMouseMove = (event: MouseEvent) => {
     const width = visualViewport?.width;
@@ -113,17 +149,34 @@
 
     mouseX = clamp(event.clientX, 0, width);
     mouseY = clamp(event.clientY, 0, height);
+
+    if (isMouseDown) {
+      const deltaX = Math.abs(mouseX - previousMouseX);
+      const deltaY = Math.abs(mouseY - previousMouseY);
+
+      mouseDelta += deltaX + deltaY;
+
+      if (mouseDelta > 20) {
+        mouseDelta = 0;
+        shootStar(mouseX, mouseY);
+      }
+    }
+  };
+
+  const onMouseUp = () => {
+    isMouseDown = false;
   };
 
   const onMouseDown = (event: MouseEvent) => {
     const pressX = event.clientX;
     const pressY = event.clientY;
 
-    const starIndex = Math.round(Math.random() * (stars.length - 1));
+    isMouseDown = true;
+    mouseDelta = 0;
+    previousMouseX = pressX;
+    previousMouseY = pressY;
 
-    stars[starIndex].isShooting = true;
-    stars[starIndex].shootingX = pressX;
-    stars[starIndex].shootingY = pressY;
+    shootStar(pressX, pressY);
   };
 
   $effect(() => {
@@ -132,46 +185,56 @@
     }
   });
 
-  onMount(() => {
-    const positionStar = (star: Star, index: number) => {
-      const xPosition = (visualViewport?.width || window.innerWidth) * star.xPercent;
-      const yPosition = (visualViewport?.height || window.innerHeight) * star.yPercent;
+  $effect(() => {
+    if (allowAnimationContext$.shouldResetStars) {
+      allowAnimationContext$.shouldResetStars = false;
+      allowAnimationContext$.shootingStarCount = 0;
+      placeAllStars(true);
 
-      stars[index] = {
-        ...star,
-        xStart: xPosition,
-        yStart: yPosition,
-        size: {
-          current: 0,
-          final: star.size.final,
-        },
-        x: {
-          current: xPosition,
-          final: xPosition,
-        },
-        y: {
-          current: yPosition,
-          final: yPosition,
-        },
-      };
+      stars.forEach((star, index) => positionStar(star, index, true));
+    }
+  });
+
+  const positionStar = (star: Star, index: number, preservePosition?: boolean) => {
+    const xPosition = (visualViewport?.width || window.innerWidth) * star.xPercent;
+    const yPosition = (visualViewport?.height || window.innerHeight) * star.yPercent;
+
+    stars[index] = {
+      ...star,
+      xStart: xPosition,
+      yStart: yPosition,
+      size: {
+        current: preservePosition ? star.size.current : 0,
+        final: star.size.final,
+      },
+      x: {
+        current: preservePosition ? star.x.current : xPosition,
+        final: xPosition,
+      },
+      y: {
+        current: preservePosition ? star.y.current : yPosition,
+        final: yPosition,
+      },
     };
+  };
 
+  onMount(() => {
     const handleResize = debounce(() => {
-      stars.forEach(positionStar);
+      stars.forEach((star, index) => positionStar(star, index));
     }, 300);
 
     const resizeObserver = new ResizeObserver((entries) => handleResize());
 
-    stars.forEach(positionStar);
-
     resizeObserver.observe(document.body);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mouseup', onMouseUp);
     requestAnimationFrame(animate);
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('mouseup', onMouseUp);
       resizeObserver.unobserve(document.body);
     };
   });
@@ -288,8 +351,6 @@
         });
       }
     });
-
-    // console.log(stars.filter((star) => star.isShooting).length, 'shooting stars');
   };
 
   let previousTimestamp = 0;
@@ -308,6 +369,8 @@
       requestAnimationFrame(animate);
     }
   };
+
+  placeAllStars();
 </script>
 
 <canvas bind:this={canvas} class="fixed left-0 top-0 -z-20"></canvas>
