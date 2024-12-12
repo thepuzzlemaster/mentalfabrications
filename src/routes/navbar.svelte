@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import { Label } from '$lib/components/ui/label';
   import { Switch } from '$lib/components/ui/switch';
   import { getAnimationContext } from '$lib/shared/animationContext';
@@ -66,10 +67,12 @@
         Click Me!
       </NavLink>
     {/if}
-    <NavLink onclick={() => (isOpen = false)} href="#about-me">About</NavLink>
-    <NavLink onclick={() => (isOpen = false)} href="#projects">Projects</NavLink>
-    <NavLink target="_blank" onclick={() => (isOpen = false)} href="/resume">Résumé</NavLink>
-    <NavLink onclick={() => (isOpen = false)} href="#contact">Contact</NavLink>
+    <NavLink onclick={() => (isOpen = false)} href={`${base}/#about-me`}>About</NavLink>
+    <NavLink onclick={() => (isOpen = false)} href={`${base}/#projects`}>Projects</NavLink>
+    <NavLink target="_blank" onclick={() => (isOpen = false)} href={`${base}/resume`}>
+      Résumé
+    </NavLink>
+    <NavLink onclick={() => (isOpen = false)} href={`${base}/#contact`}>Contact</NavLink>
     <!-- <NavLink onclick={() => (isOpen = false)} href="#art">Art</NavLink> -->
   </ul>
 </nav>
