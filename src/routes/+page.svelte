@@ -4,6 +4,7 @@
   import radiousImage from '$lib/assets/images/projects-radious.webp';
   import scheduliciousImage from '$lib/assets/images/projects-schedulicious.webp';
   import tableauImage from '$lib/assets/images/projects-tableau.webp';
+  import Link from '$lib/components/link.svelte';
   import StarBackground from '$lib/components/starBackground/starBackground.svelte';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
@@ -249,8 +250,13 @@
       id="contact"
     >
       <h2 class={H2}>Get in touch!</h2>
+      <div class="my-4">
+        Find me on <Link href="https://www.linkedin.com/in/ilan-epstein/" target="_blank">
+          LinkedIn
+        </Link>
+      </div>
       <form
-        class="flex w-full max-w-3xl flex-col"
+        class="mt-8 flex w-full max-w-3xl flex-col"
         action="https://api.web3forms.com/submit"
         method="POST"
       >
