@@ -23,7 +23,7 @@
       <div class="mt-24 flex flex-col content-center items-center gap-x-4 lg:flex-row">
         <img
           alt="Close-up view of iLan Epstein's face. He has a 5 o'clock shadow on his face, he's making a slight smirk with his mouth, and he's wearing a newsie cap."
-          class="~sm:~max-w-56/96 w-full rounded-full object-cover"
+          class="w-full rounded-full object-cover ~sm:~max-w-56/96"
           src={iLanPhoto}
         />
         <div class={cn(STAR_BLOCKER, 'flex-col', 'p-4', 'md:p-8')}>
@@ -79,9 +79,9 @@
 
       <Testimonial
         class="mb-16"
-        quote="iLan's a rockstar engineer and a cutie patootie to boot! If you can dream it, he can build it."
+        quote="iLan's a rockstar engineer! If you can dream it, he can build it."
         name="Harmony Jorden"
-        role="Product Designer"
+        role="Senior Product Designer"
         company="Salesforce"
       />
 
@@ -138,19 +138,22 @@
       >
         {#snippet content()}
           <p class="mb-2">
-            The Tableau Shared Widgets team focuses on creating and maintaining a unified component
-            library. Working closely with the Tableau Design Team, they ensure high-level design
-            fidelity as they develop shared UI components that work consistently in diverse
-            environments which are utilized by more than 100 internal development teams across
-            Tableau (Shared Widgets) as well as by public consumers (Tableau-UI).
+            My work on the "Shared Widgets" team at Tableau involved creating and maintaining our
+            internal DLS web UI component library. Each component is WCAG 2.0 compliant, and our
+            library is consumed by over 150 modules internally.
           </p>
+
+          <p class="mb-2">
+            My team acted as the bridge between design and dev by striving to ensure a consistent
+            high-quality user experience through the thoughtful usage of motion, examining
+            edge-cases, and following best practices for UX on the web.
+          </p>
+
           <p>
-            These widgets are designed to enhance functionality and user experience by supporting
-            features like dashboard extensions, which allow custom JavaScript integrations with
-            Tableau visualizations, context menus that interact with Tableau Workbooks, and all
-            other UI that users use to interact with Tableau. The team's efforts help reduce the
-            maintenance burden of multiple codebases, ensure feature consistency, accessibility
-            compliance, and significantly accelerate development cycles across Tableau’s ecosystem.
+            We also maintain a living DLS documentation website, which captures both the principles
+            behind widgets usage, explanations for when to use which components, and live code
+            samples for our devs to consume. We manage both the code we write and the infrastructure
+            which supports its build/publishing/documentation workflows
           </p>
         {/snippet}
       </ProjectCard>
