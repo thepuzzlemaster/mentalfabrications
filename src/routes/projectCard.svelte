@@ -41,6 +41,10 @@
     <div class="flex flex-col items-center gap-6 lg:flex-row">
       <div class="lg:w-1/2">
         <div>{@render content()}</div>
+        {#if role}
+          <div class="mt-4 font-bold">My role:</div>
+          <div>{@render role()}</div>
+        {/if}
         {#if technologies}
           <div class="mt-4 font-bold">
             Technologies:
@@ -67,6 +71,5 @@
       </div>
       <img class="max-w-full rounded-2xl object-cover lg:w-1/2" alt={imageAlt} src={imageUrl} />
     </div>
-    <div>{@render role?.()}</div>
   </div>
 </div>

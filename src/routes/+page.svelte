@@ -75,6 +75,15 @@
             strong foundation for scalability and ongoing innovation.
           </p>
         {/snippet}
+        {#snippet role()}
+          <p>
+            At Radious, I architected and bulit the entirety of the front-end. Additionally, I
+            stepped in to establish coding guidelines and best practices for both the front-end and
+            the back-end codebases. As a founder, my role very often extended far beyond the
+            technical side, including work in defining company strategy and direction, conducting
+            user interviews, UX design, and managing our employees.
+          </p>
+        {/snippet}
       </ProjectCard>
 
       <Testimonial
@@ -95,7 +104,6 @@
           'Tailwind',
           'Typescript',
           'Vitest w/ Testing Library',
-          'Zod',
           'git',
         ]}
         title="Schedulicious"
@@ -115,6 +123,13 @@
             a robust waitlist feature, allowing users to sign up for full timeslots and
             automatically secure a spot if one opens up. This combination of efficiency and
             user-centric design ensures a smooth experience for both organizers and participants.
+          </p>
+        {/snippet}
+
+        {#snippet role()}
+          <p>
+            I designed and built the front-end of the application and worked with another developer
+            on designing the back-end API.
           </p>
         {/snippet}
       </ProjectCard>
@@ -154,6 +169,14 @@
             behind widgets usage, explanations for when to use which components, and live code
             samples for our devs to consume. We manage both the code we write and the infrastructure
             which supports its build/publishing/documentation workflows
+          </p>
+        {/snippet}
+        {#snippet role()}
+          <p>
+            As one of only 2 developers on the team, my role focused on creating new and maintaning
+            existing widgets, implementing motion (where applicable), and improving/maintaining our
+            CI/CD pipeline, testing framework, and infrastructure around our internal documentation
+            site.
           </p>
         {/snippet}
       </ProjectCard>
@@ -208,6 +231,14 @@
               </li>
             </ul>
           </div>
+        {/snippet}
+        {#snippet role()}
+          <p>
+            I was primarily responsible for choosing an appropriate tech-stack given the needs of a
+            specific project. Bootstrapping the projects, and ensuring quality and consistency
+            across the team. As well as requirements gathering, UX research, and client
+            presentations.
+          </p>
         {/snippet}
       </ProjectCard>
     </section>
