@@ -34,7 +34,9 @@
             browsing, clicking, or just marveling at the smoothness of a well-designed hover state.
           </p>
           <h4 class={H4}>Accessibility + Design Systems + Internal tooling</h4>
-          <p>Typescript/Javascript, HTML, CSS, NodeJS, React, NextJS, git, python, svelte</p>
+          <p>
+            Typescript/Javascript, HTML, CSS, NodeJS, React, NextJS, git, python, Angular, svelte
+          </p>
         </div>
       </div>
     </section>

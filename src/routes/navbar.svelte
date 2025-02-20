@@ -90,7 +90,7 @@
     {/if}
     <NavLink onclick={() => (isOpen$ = false)} href={`${base}/#about-me`}>About</NavLink>
     <NavLink onclick={() => (isOpen$ = false)} href={`${base}/#projects`}>Projects</NavLink>
-    <NavLink target="_blank" onclick={() => (isOpen$ = false)} href={`${base}/resume`}>
+    <NavLink target="_blank" onclick={() => (isOpen$ = false)} href={`${base}/ilan-resume.pdf`}>
       Résumé
     </NavLink>
     <NavLink onclick={() => (isOpen$ = false)} href={`${base}/#contact`}>Contact</NavLink>
