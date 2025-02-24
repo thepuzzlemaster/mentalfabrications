@@ -2,37 +2,50 @@
   import { STAR_BLOCKER } from '$lib/styleClasses/starBlocker';
   import { cn } from '$lib/utils';
   import type { Snippet } from 'svelte';
-  import type { HTMLAnchorAttributes } from 'svelte/elements';
+  import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+  import { fade } from 'svelte/transition';
 
-  type $$Props = HTMLAnchorAttributes;
-
-  interface Props {
+  type Props = {
     children: Snippet;
-    className?: $$Props['class'];
-    href: $$Props['href'];
-  }
+    size?: 'sm';
+  } & (
+    | ({
+        href: HTMLAnchorAttributes['href'];
+      } & HTMLAnchorAttributes)
+    | ({
+        href?: never;
+      } & HTMLButtonAttributes)
+  );
 
-  let { children, className, href, ...restProps }: Props = $props();
+  let { children, class: className, href, size, ...restProps }: Props = $props();
+  let isAnchor = !!href;
+  let Component: 'a' | 'button' = isAnchor ? 'a' : 'button';
 </script>
 
-<li class={cn(className)}>
-  <a
+<li
+  out:fade={{ duration: 200 }}
+  in:fade={{ delay: 250 }}
+  class={cn('flex w-full content-end md:w-auto', className)}
+>
+  <svelte:element
+    this={Component}
     class={cn(
       STAR_BLOCKER,
       'rounded-md',
       'px-4',
-      'py-2',
+      'py-1',
       'text-emerald-400',
       'hover:text-emerald-300',
       'focus-visible:outline-none',
-      'focus-visible:ring-1',
+      'focus-visible:ring',
       'focus-visible:ring-ring',
-      'text-xl',
+      size ? 'text-xl' : 'text-2xl',
       'transition-colors',
+      'w-full',
     )}
     {href}
     {...restProps}
   >
     {@render children?.()}
-  </a>
+  </svelte:element>
 </li>

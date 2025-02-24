@@ -1,19 +1,20 @@
 <script lang="ts">
+  import { setAnimationContext, type AnimationContext } from '$lib/shared/animationContext';
   import '../app.css';
-  import NavLink from './navLink.svelte';
+  import Navbar from './navbar.svelte';
+
   let { children } = $props();
+
+  let allowAnimation$ = $state<AnimationContext>({
+    allowAnimation: true,
+    shouldResetStars: false,
+    shootingStarCount: 0,
+  });
+
+  setAnimationContext(allowAnimation$);
 </script>
 
-<nav class="fixed right-0 top-0 z-30 mt-2">
-  <ul class="flex justify-end px-4">
-    <NavLink href="#home">Home</NavLink>
-    <NavLink href="#about-me">About me</NavLink>
-    <NavLink href="#skills">Skills</NavLink>
-    <NavLink href="#projects">Projects</NavLink>
-    <NavLink href="#contact">Contact</NavLink>
-    <NavLink href="#art">Art</NavLink>
-  </ul>
-</nav>
-<div class="p-8 text-emerald-50">
+<Navbar />
+<div class="p-4 text-emerald-50 md:p-8">
   {@render children()}
 </div>
