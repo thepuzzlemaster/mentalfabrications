@@ -7,5 +7,6 @@ and this project pseudo-adheres to [Semantic Versioning](https://semver.org/spec
 
 ## [Unreleased]
 
+## [1.0.0] 2025-02-23
 ### Features
 - Initial release

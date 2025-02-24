@@ -1,7 +1,14 @@
 {
   "name": "mentalfabrications",
-  "version": "0.0.1",
+  "description": "My own personal website and portfolio",
+  "version": "1.0.0",
   "type": "module",
+  "author": {
+    "name": "iLan Epstein",
+    "email": "ilan@mentalfabrications.com",
+    "url": "https://www.mentalfabrications.com"
+  },
+  "repository": "git@github.com:thepuzzlemaster/mentalfabrications.git",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
