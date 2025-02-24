@@ -15,6 +15,9 @@
   import { cn } from '$lib/utils';
   import ProjectCard from './projectCard.svelte';
   import Testimonial from './testimonial.svelte';
+
+  const githubUrl = 'https://www.github.com/thepuzzlemaster';
+  const linkedInUrl = 'https://www.linkedin.com/in/ilan-epstein/';
 </script>
 
 <StarBackground />
@@ -38,6 +41,20 @@
           <p>
             Typescript/Javascript, HTML, CSS, NodeJS, React, NextJS, git, Angular, svelte, python
           </p>
+          <div class="mt-6 flex gap-4">
+            <Link href={githubUrl} target="_blank" aria-label="View github profile">
+              <span
+                class="inline-block h-10 w-10 bg-current"
+                style="mask: url(src/lib/assets/svgs/github.svg) no-repeat center; -webkit-mask: url(src/lib/assets/svgs/github.svg) no-repeat center; mask-size: contain;"
+              ></span>
+            </Link>
+            <Link href={linkedInUrl} target="_blank" aria-label="View linkedIn profile">
+              <span
+                class="inline-block h-10 w-10 bg-current"
+                style="mask: url(src/lib/assets/svgs/linkedin.svg) no-repeat center; -webkit-mask: url(src/lib/assets/svgs/linkedin.svg) no-repeat center; mask-size: contain;"
+              ></span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -251,8 +268,11 @@
     >
       <h2 class={H2}>Get in touch!</h2>
       <div class="my-4">
-        Find me on <Link href="https://www.linkedin.com/in/ilan-epstein/" target="_blank">
-          LinkedIn
+        Find me on <Link href={linkedInUrl} target="_blank">LinkedIn</Link> and <Link
+          href={githubUrl}
+          target="_blank"
+        >
+          github
         </Link>
       </div>
       <form
