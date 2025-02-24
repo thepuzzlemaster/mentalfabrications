@@ -46,8 +46,8 @@
           <div>{@render role()}</div>
         {/if}
         {#if technologies}
-          <div class="mt-4 font-bold">
-            Technologies:
+          <div class="mt-4 font-mono">
+            <span class="font-bold">Technologies:</span>
             <ul class="m-0 inline p-0">
               {#each technologies as technology, index}
                 <li class="inline-flex items-center">

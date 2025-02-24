@@ -36,7 +36,7 @@
           </p>
           <h4 class={H4}>Accessibility + Design Systems + Internal tooling</h4>
           <p>
-            Typescript/Javascript, HTML, CSS, NodeJS, React, NextJS, git, python, Angular, svelte
+            Typescript/Javascript, HTML, CSS, NodeJS, React, NextJS, git, Angular, svelte, python
           </p>
         </div>
       </div>
@@ -176,10 +176,10 @@
         {/snippet}
         {#snippet role()}
           <p>
-            As one of only 2 developers on the team, my role focused on creating new and maintaning
-            existing widgets, implementing motion (where applicable), and improving/maintaining our
-            CI/CD pipeline, testing framework, and infrastructure around our internal documentation
-            site.
+            As one of only 2 developers on the team, my role focused on both creating and maintaning
+            new and existing widgets, implementing motion (where applicable), and
+            improving/maintaining our CI/CD pipeline, testing framework, and infrastructure around
+            our internal documentation site.
           </p>
         {/snippet}
       </ProjectCard>
@@ -238,9 +238,9 @@
         {#snippet role()}
           <p>
             I was primarily responsible for choosing an appropriate tech-stack given the needs of a
-            specific project. Bootstrapping the projects, and ensuring quality and consistency
-            across the team. As well as requirements gathering, UX research, and client
-            presentations.
+            specific project. Additionally, I was often responsible for bootstrapping the projects,
+            ensuring quality and consistency across the team, requirements gathering, UX research,
+            and client presentations.
           </p>
         {/snippet}
       </ProjectCard>
