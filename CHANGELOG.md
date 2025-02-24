@@ -7,6 +7,7 @@ and this project pseudo-adheres to [Semantic Versioning](https://semver.org/spec
 
 ## [Unreleased]
 
+## [1.0.1] 2025-02-23
 ### Fixes
 - Fix broken svg links
 
