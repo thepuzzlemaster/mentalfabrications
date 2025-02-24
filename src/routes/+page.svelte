@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { base } from '$app/paths';
   import iLanPhoto from '$lib/assets/images/me-bk-wedding-sq.webp';
   import frogImage from '$lib/assets/images/projects-frog.png';
   import radiousImage from '$lib/assets/images/projects-radious.webp';
@@ -44,14 +45,14 @@
           <div class="mt-6 flex gap-4">
             <Link href={githubUrl} target="_blank" aria-label="View github profile">
               <span
-                class="inline-block h-10 w-10 bg-current"
-                style="mask: url(src/lib/assets/svgs/github.svg) no-repeat center; -webkit-mask: url(src/lib/assets/svgs/github.svg) no-repeat center; mask-size: contain;"
+                class="inline-block h-9 w-9 bg-current"
+                style={`mask: url(${base}/github.svg) no-repeat center; -webkit-mask: url(${base}/github.svg) no-repeat center; mask-size: contain;`}
               ></span>
             </Link>
             <Link href={linkedInUrl} target="_blank" aria-label="View linkedIn profile">
               <span
-                class="inline-block h-10 w-10 bg-current"
-                style="mask: url(src/lib/assets/svgs/linkedin.svg) no-repeat center; -webkit-mask: url(src/lib/assets/svgs/linkedin.svg) no-repeat center; mask-size: contain;"
+                class="inline-block h-9 w-9 bg-current"
+                style={`mask: url(${base}/linkedin.svg) no-repeat center; -webkit-mask: url(${base}/linkedin.svg) no-repeat center; mask-size: contain;`}
               ></span>
             </Link>
           </div>

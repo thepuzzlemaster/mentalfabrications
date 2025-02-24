@@ -7,6 +7,9 @@ and this project pseudo-adheres to [Semantic Versioning](https://semver.org/spec
 
 ## [Unreleased]
 
+### Fixes
+- Fix broken svg links
+
 ## [1.0.0] 2025-02-23
 ### Features
 - Initial release
