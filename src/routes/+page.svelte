@@ -35,7 +35,7 @@
           <h1 class={H1}>iLan Epstein</h1>
           <h3 class={H3}>UX Engineer // Front-end Developer</h3>
           <p class={cn(BODY_LARGE, 'mb-4')}>
-            I specialize in crafting digital spaces where users feel at home—whether they’re
+            I specialize in crafting digital spaces where users feel at home - whether they’re
             browsing, clicking, or just marveling at the smoothness of a well-designed hover state.
           </p>
           <h4 class={H4}>Accessibility + Design Systems + Internal tooling</h4>
@@ -138,8 +138,8 @@
             complexities of scheduling.
           </p>
           <p>
-            The platform lets users see who else is attending their chosen timeslot—perfect for
-            coordinating with friends or colleagues—while carefully safeguarding sensitive
+            The platform lets users see who else is attending their chosen timeslot - perfect for
+            coordinating with friends or colleagues - while carefully safeguarding sensitive
             information. It also supports modifying or canceling existing reservations and includes
             a robust waitlist feature, allowing users to sign up for full timeslots and
             automatically secure a spot if one opens up. This combination of efficiency and
