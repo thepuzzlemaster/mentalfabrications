@@ -7,6 +7,10 @@ and this project pseudo-adheres to [Semantic Versioning](https://semver.org/spec
 
 ## [Unreleased]
 
+### Features
+- Update favicon
+- Add Amina testimonial
+
 ## [1.1.0] 2025-03-08
 ### Features
 - Language and resume tweaks

@@ -109,10 +109,10 @@
 
       <Testimonial
         class="mb-16"
-        quote="iLan's a rockstar engineer! If you can dream it, he can build it."
-        name="Harmony Jorden"
-        role="Senior Product Designer"
-        company="Salesforce"
+        quote="iLan is one of those people you’ll never forget working with. Balancing high standards with fun, thoughtful analysis with speed, technical prowess with empathy, he’s a one-of-a-kind blend that motivates people around him to be better."
+        name="Amina Moreau"
+        role="CEO & Cofounder"
+        company="Radious"
       />
 
       <ProjectCard
@@ -201,6 +201,14 @@
           </p>
         {/snippet}
       </ProjectCard>
+
+      <Testimonial
+        class="mb-16"
+        quote="iLan's a rockstar engineer! If you can dream it, he can build it."
+        name="Harmony Jorden"
+        role="Senior Product Designer"
+        company="Salesforce"
+      />
 
       <ProjectCard
         class={cn(STAR_BLOCKER, 'mb-16')}
