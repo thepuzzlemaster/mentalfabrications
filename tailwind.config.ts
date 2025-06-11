@@ -22,7 +22,7 @@ const config: Config = {
     },
     extend: {
       backgroundImage: {
-        radial: 'radial-gradient(var(--tw-gradient-stops))',
+        radial: 'radial-gradient(closest-side, var(--tw-gradient-stops))',
         'radial-bottom-right': 'radial-gradient(at 90% 90%, var(--tw-gradient-stops))',
         'radial-top-left': 'radial-gradient(at -10% -10%, var(--tw-gradient-stops))',
       },
