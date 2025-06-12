@@ -1,10 +1,15 @@
 <script lang="ts">
   import { getAnimationContext } from '$lib/shared/animationContext';
   import { tweenProperty } from '$lib/shared/tweens';
+  import { cn } from '$lib/utils';
   import clamp from 'lodash/clamp';
   import debounce from 'lodash/debounce';
   import { onMount } from 'svelte';
+  import type { HTMLCanvasAttributes } from 'svelte/elements';
 
+  interface Props extends HTMLCanvasAttributes {}
+
+  const { class: className, ...restProps }: Props = $props();
   const allowAnimationContext$ = getAnimationContext();
 
   type ChangingStarProp<T> = {
@@ -373,4 +378,8 @@
   placeAllStars();
 </script>
 
-<canvas bind:this={canvas} class="fixed left-0 top-0 -z-20"></canvas>
+<canvas
+  bind:this={canvas}
+  class={cn('fixed left-0 top-0 -z-20', className)}
+  {...restProps}
+></canvas>

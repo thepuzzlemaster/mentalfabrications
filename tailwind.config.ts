@@ -4,12 +4,12 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-  darkMode: [ 'class' ],
+  darkMode: ['class'],
   content: {
     extract,
-    files: [ './src/**/*.{html,js,svelte,ts}' ],
+    files: ['./src/**/*.{html,js,svelte,ts}'],
   },
-  safelist: [ 'dark' ],
+  safelist: ['dark'],
   theme: {
     screens,
     fontSize,
@@ -21,6 +21,11 @@ const config: Config = {
       },
     },
     extend: {
+      backgroundImage: {
+        radial: 'radial-gradient(closest-side, var(--tw-gradient-stops))',
+        'radial-bottom-right': 'radial-gradient(at 90% 90%, var(--tw-gradient-stops))',
+        'radial-top-left': 'radial-gradient(at -10% -10%, var(--tw-gradient-stops))',
+      },
       colors: {
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',
@@ -73,7 +78,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: [ ...fontFamily.sans ],
+        sans: [...fontFamily.sans],
       },
       keyframes: {
         'accordion-down': {
@@ -103,7 +108,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [ fluid, tailwindcssAnimate ],
+  plugins: [fluid, tailwindcssAnimate],
 };
 
 export default config;

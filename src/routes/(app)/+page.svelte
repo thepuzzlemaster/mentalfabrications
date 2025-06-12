@@ -2,6 +2,7 @@
   import { base } from '$app/paths';
   import iLanPhoto from '$lib/assets/images/me-bk-wedding-sq.webp';
   import frogImage from '$lib/assets/images/projects-frog.png';
+  import mentalfabricationsImage from '$lib/assets/images/projects-mentalfabrications.webp';
   import radiousImage from '$lib/assets/images/projects-radious.webp';
   import scheduliciousImage from '$lib/assets/images/projects-schedulicious.webp';
   import tableauImage from '$lib/assets/images/projects-tableau.webp';
@@ -268,6 +269,38 @@
             ensuring quality and consistency across the team, requirements gathering, UX research,
             and client presentations.
           </p>
+        {/snippet}
+      </ProjectCard>
+      <ProjectCard
+        class={cn(STAR_BLOCKER, 'mb-16')}
+        imageAlt=""
+        imageUrl={mentalfabricationsImage}
+        linkUrl="/starfield"
+        title="mentalfabrications"
+        technologies={['svelte', 'canvas', 'tailwind', 'git']}
+      >
+        {#snippet content()}
+          <p class="mb-2">
+            This site serves as my personal portfolio, showcasing a collection of projects that
+            highlight my skills and experience as a UX Engineer and Front-end Developer. Here,
+            you'll find examples of my work in crafting user-friendly and efficient digital spaces,
+            with a focus on accessibility, design systems, creativity, and robust technical
+            implementation.
+          </p>
+          <p>
+            Click through to play around with the starfield I created for the site. It was built
+            from scratch without the use of any animation frameworks or physics libraries. The stars
+            are rendered on a <code class="text-slate-400">canvas</code>
+            element. And all the source code is available on <Link
+              href={`${githubUrl}/mentalfabrications`}
+              target="_blank"
+            >
+              my github
+            </Link>.
+          </p>
+        {/snippet}
+        {#snippet role()}
+          <p>Fully responsible for the design and implementation of the site.</p>
         {/snippet}
       </ProjectCard>
     </section>
